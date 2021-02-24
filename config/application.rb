@@ -21,6 +21,7 @@ Bundler.require(*Rails.groups)
 
 module Byestock
   class Application < Rails::Application
+    config.api_only = true
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
 
@@ -34,5 +35,16 @@ module Byestock
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.action_controller.default_protect_from_forgery = false
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins '*'
+        resource '/api/*',
+                 :headers => :any,
+                 :expose => ['access-token', 'expiry', 'token-type', 'uid', 'client'],
+                 :methods => [:get, :post, :options, :delete, :put]
+      end
+    end
   end
 end
