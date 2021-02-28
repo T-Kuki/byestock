@@ -20,7 +20,7 @@ Vue.config.productionTip = false
 Vue.prototype.$axios = axios
 extend('required', {
   ...required,
-  message: '入力が必須です。'
+  message: '入力必須です。'
 })
 
 document.addEventListener('DOMContentLoaded', () => {

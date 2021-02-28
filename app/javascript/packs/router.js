@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from './pages/site/home'
-import Login from './pages/user/login.vue'
+import Login from './pages/wholesaler/login.vue'
+import ShopLogin from './pages/shopUser/login.vue'
 import Store from './store/store.js'
 //import SignOut from './components/signOut'
 
@@ -12,6 +13,11 @@ const routes= [
     path: '/login',
     name: 'login',
     component: Login
+  },
+  {
+    path: '/shop_login',
+    name: 'shopLogin',
+    component: ShopLogin
   },
   {
     name: 'home',
