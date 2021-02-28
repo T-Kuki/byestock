@@ -1,6 +1,8 @@
+/* eslint-disable no-undef */
 import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
+import axios from 'axios'
 
 Vue.use(Vuex)
 
@@ -11,9 +13,8 @@ const store = new Vuex.Store({
   })],
 
   state: {
-    headers: null,
-    //data:ユーザー情報
-    data: null
+    headers: null, //ユーザーtoken
+    data: null //data:ユーザー情報
   },
 
   mutations: {
@@ -44,24 +45,24 @@ const store = new Vuex.Store({
 
   actions: {
     signUp(context, params) {
-      this.axios
+      axios
         .post('/api/v1/auth.json', params)
         .then(function (response) {
           context.commit('set_header', response.headers)
           context.commit('set_data', response.data)
         })
     },
-    //paramsはemailなどのユーザー情報が入る
-    signIn(context, params) {
-      this.axios
+    //params:emailなどのユーザー情報
+    login(context, params) {
+      axios
         .post('/api/v1/auth/sign_in.json', params)
         .then(function (response) {
           context.commit('set_header', response.headers)
           context.commit('set_data', response.data)
         })
     },
-    signOut(context) {
-      this.axios
+    logout(context) {
+      axios
         .delete('/api/v1/auth/sign_out.json', { headers: context.state.headers })
         .then(function () {
           context.commit('signOut')

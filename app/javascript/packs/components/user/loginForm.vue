@@ -1,22 +1,30 @@
 <template>
   <div>
-    <form>
+    <form @submit.prevent="login()">
       <div>
-        <label>Email</label>
-        <input
-          v-model="email"
-          v-validate="'required|email'"
-          type="text">
+        <ValidationProvider
+          v-slot="{ errors }"
+          rules="required">
+          <label>Email</label>
+          <input
+            v-model="email"
+            type="text">
+          <span>{{ errors[0] }}</span>
+        </ValidationProvider>
       </div>
       <div>
-        <label>Password</label>
-        <input
-          v-model="password"
-          v-validate="'required'"
-          name="password"
-          type="password">
+        <ValidationProvider
+          v-slot="{ errors }"
+          rules="required">
+          <label>Password</label>
+          <input
+            v-model="password"
+            name="password"
+            type="password">
+          <span>{{ errors[0] }}</span>
+        </ValidationProvider>
       </div>
-      <button @click="signIn()">
+      <button type="submit">
         Sign In
       </button>
     </form>
@@ -24,20 +32,26 @@
 </template>
 
 <script>
+import { ValidationProvider } from 'vee-validate'
 export default {
+  components: {
+    ValidationProvider
+  },
   data: function(){
     return {
       value: null,
       dialog: false,
       email: '',
       password: '',
-      errors: ''
+     
     }
   },
   methods: {  
-    signIn() {
-      this.$store.dispatch('signIn', {email: this.email, password: this.password})
-      //this.$emit('signCheckMethod', this.email)
+    login() {
+      this.$store.dispatch('login', {email: this.email, password: this.password})
+      if (this.$store.state.data){
+        this.$router.push({ name: 'home', params: { userId: 123 }})
+      }
     }
   }
 }

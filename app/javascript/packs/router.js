@@ -1,21 +1,38 @@
-import VueRouter from 'vue-router'
 import Vue from 'vue'
+import VueRouter from 'vue-router'
+import Home from './pages/site/home'
 import Login from './pages/user/login.vue'
+import Store from './store/store.js'
 //import SignOut from './components/signOut'
 
 Vue.use(VueRouter)
-export default new VueRouter({
+
+const routes= [
+  {
+    path: '/login',
+    name: 'login',
+    component: Login
+  },
+  {
+    name: 'home',
+    path: '/',
+    component: Home,
+    meta: { requiresAuth: true }
+  }
+]
+
+const router = new VueRouter({
   mode: 'history',
-  routes: [
-    {
-      path: '/auth/sign_in',
-      name: 'signIn',
-      component: Login
-    },
-    //{
-    //  path: '/auth/sign_out',
-    //  name: 'signOut',
-    //  component: SignOut
-    //},
-  ]
+  base: process.env.BASE_URL,
+  routes
 })
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth) && !Store.state.data) {
+    next({ path: '/login', query: { redirect: to.fullPath } })
+  } else {
+    next()
+  }
+})
+
+export default router

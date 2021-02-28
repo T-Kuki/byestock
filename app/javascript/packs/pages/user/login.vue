@@ -1,13 +1,13 @@
 <template>
-  <SignIn />
+  <Login />
 </template>
 
 <script>
-import SignIn from '../../components/user/loginForm'
+import Login from '../../components/user/loginForm'
 
 export default {
   components: {
-    SignIn,
+    Login,
   },
   computed: {
     currentUser() {
