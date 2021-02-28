@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   # mount_devise_token_auth_for 'Wholesaler', at: 'auth'
-  get 'page/index'
+  root to: 'page#index'
+  get '/login', to: 'page#index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   namespace :api, defaults: { format: 'json' } do
     namespace :v1 do
