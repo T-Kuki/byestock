@@ -10,6 +10,9 @@ export default {
   components: {
     Sidebar
   },
+  currentGetter(){
+    return this.$store.getters.data
+  }
 }
 </script>
 

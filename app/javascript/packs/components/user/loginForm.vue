@@ -49,9 +49,7 @@ export default {
   methods: {  
     login() {
       this.$store.dispatch('login', {email: this.email, password: this.password})
-      if (this.$store.state.data){
-        this.$router.push({ name: 'home', params: { userId: 123 }})
-      }
+      this.$router.push({ name: 'home'})
     }
   }
 }

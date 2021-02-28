@@ -26,7 +26,6 @@ export default {
         { title: 'お気に入り・閲覧履歴', icon: 'mdi-home-city', link: 'favHist' },
         { title: 'メールアドレス', icon: 'mdi-account', link: 'email' },
         { title: 'パスワード', icon: 'mdi-account', link: 'password' },
-        //{ title: '支払い方法', icon: 'mdi-account-group-outline',link: 'siteIndex' },
         { title: 'お問合わせ', icon: 'mdi-account-group-outline', link: 'contact' },
       ],
     }
@@ -39,6 +38,7 @@ export default {
   methods: {
     logout() {
       this.$store.dispatch('logout')
+      this.$router.push({ name: 'login'})
     }
   }
 

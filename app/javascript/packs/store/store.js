@@ -16,7 +16,11 @@ const store = new Vuex.Store({
     headers: null, //ユーザーtoken
     data: null //data:ユーザー情報
   },
-
+  getters: {
+    storeData (state) {
+      return state.data
+    },
+  },
   mutations: {
     //サインイン時のレスポンスヘッダから情報を抜き出して保存
     set_header(state, payload) {
