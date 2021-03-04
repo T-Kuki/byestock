@@ -24,7 +24,30 @@ const routes= [
     path: '/',
     component: Home,
     meta: { requiresAuth: true }
-  }
+  },
+  {
+    name: 'floors',
+    path: '/floors',
+    component: Home
+  },
+  {
+    name: 'doors',
+    path: '/doors',
+    component: Home
+  }, {
+    name: 'features',
+    path: '/features',
+    component: Home
+  }, {
+    name: 'wetareas',
+    path: '/wetareas',
+    component: Home
+  }, {
+    name: 'others',
+    path: '/others',
+    component: Home
+  },
+
 ]
 
 const router = new VueRouter({
