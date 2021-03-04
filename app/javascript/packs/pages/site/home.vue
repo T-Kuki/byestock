@@ -4,6 +4,7 @@
       <Sidebar />
     </div>
     <div>
+      <h2>床材</h2>
       <ItemList />
     </div>
   </div>
