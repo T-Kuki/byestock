@@ -1,19 +1,23 @@
 <template>
-  <div :class="$style.sidebar">
-    <h1 :class="$style.title">
+  <div class="sidebar">
+    <h1 class="title">
       byestock
     </h1>
-    <p> {{ currentUser.email }}</p>
-    <ul>
-      <li
+    <p> {{ currentUser.email }} さん</p>
+    <div>
+      <router-link
         v-for="item in items"
-        :key="item.title">
+        :key="item.title"
+        class="menu_items"
+        :to="{ name: item.link }">
         {{ item.title }}
-      </li>
-    </ul>
-    <button @click="logout">
-      ログアウト
-    </button>
+      </router-link>
+      <button
+        class="logout_btn"
+        @click="logout">
+        ログアウト
+      </button>
+    </div>
   </div>
 </template>
 
@@ -22,11 +26,11 @@ export default {
   data: function(){
     return {
       items: [
-        { title: '床材', icon: 'mdi-home-city', link: 'profile' },
-        { title: 'お気に入り・閲覧履歴', icon: 'mdi-home-city', link: 'favHist' },
-        { title: 'メールアドレス', icon: 'mdi-account', link: 'email' },
-        { title: 'パスワード', icon: 'mdi-account', link: 'password' },
-        { title: 'お問合わせ', icon: 'mdi-account-group-outline', link: 'contact' },
+        { title: '床材', link: 'floors' },
+        { title: '建具', link: 'doors' },
+        { title: '造作材', link: 'features' },
+        { title: '水回り', link: 'wetareas' },
+        { title: 'その他', link: 'others' },
       ],
     }
   },
@@ -46,16 +50,23 @@ export default {
 </script>
 <style module>
 .title {
-    border: dashed 2px #5b8bd0;
-    border-radius: 5px;
     padding: 3px;
 }
 .sidebar{
     height: 100%;
-    width: 200px;
-    background-color: #fff;
+    width: 20%;
+    text-align: center;
+    background-color: #2699FB;
     position: fixed!important;
     z-index: 1;
     overflow: auto;
+}
+.menu_items{
+  display: block;
+  margin:2rem;
+}
+.logout_btn{
+  margin:1rem auto;
+  padding: 0 1,5rem;
 }
 </style>
