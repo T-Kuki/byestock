@@ -1,14 +1,22 @@
 <template>
-  <div>
-    <Home />
+  <div class="wrapper">
+    <div class="main">
+      <Navbar />
+    </div>
+    <div>
+      <h2>床材</h2>
+      <ItemList />
+    </div>
   </div>
 </template>
 
 <script>
-import Home from '../../components/templates/site/homePage.vue'
+import Navbar from '../../organsms/sideNav/navbar'
+import ItemList from '../../organsms/itemlist/itemlist'
 export default {
   components: {
-    Home
+    Navbar,
+    ItemList
   },
   currentGetter(){
     return this.$store.getters.data

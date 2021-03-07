@@ -9,17 +9,17 @@
           在庫販売サービス
         </P>
       </div>
-      <Login />
+      <LoginPage />
     </div>
   </div>
 </template>
 
 <script>
-import Login from '../../components/wholesaler/loginForm'
+import LoginPage from '../../components/templates/wholesaler/loginPage'
 
 export default {
   components: {
-    Login,
+    LoginPage,
   },
   computed: {
     currentUser() {
