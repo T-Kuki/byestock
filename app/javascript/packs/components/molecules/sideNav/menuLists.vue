@@ -51,6 +51,7 @@ export default {
     overflow: auto;
 }
 .menu_items{
+  color: white;
   display: block;
   margin:2rem;
 }

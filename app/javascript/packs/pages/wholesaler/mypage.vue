@@ -1,17 +1,15 @@
 <template>
-  <div class="login_page">
-    <div class="bg-mask">
-      <Login />
-    </div>
+  <div>
+    <Mypage />
   </div>
 </template>
 
 <script>
-import Login from '../../components/templates/wholesaler/mypage'
+import Mypage from '../../components/templates/wholesaler/mypage'
 
 export default {
   components: {
-    Login,
+    Mypage,
   }
 }
 </script>

@@ -29,17 +29,6 @@ export default {
     MenuList,
     WholesalerMenuList
   },
-  data: function(){
-    return {
-      items: [
-        { title: '床材', link: 'floors' },
-        { title: '建具', link: 'doors' },
-        { title: '造作材', link: 'features' },
-        { title: '水回り', link: 'wetareas' },
-        { title: 'その他', link: 'others' },
-      ],
-    }
-  },
   computed: {
     currentUser() {
       return this.$store.state.data
@@ -54,7 +43,7 @@ export default {
       this.$router.push({ name: 'login'})
     },
     showMypage(){
-      this.$router.push({ name: 'wholesalerMypage'})
+      this.$router.push({ name: 'items'})
     }
   }
 

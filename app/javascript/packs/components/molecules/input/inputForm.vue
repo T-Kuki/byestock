@@ -52,8 +52,8 @@ label, input {
   margin: auto;
 }
 .form_block{
-  min-width: 250px;
-  display: inline-block;
+  width: 300px;
+  position: relative;
   margin: 1rem auto;
 }
 .form_label{

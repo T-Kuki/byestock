@@ -5,6 +5,11 @@ import Home from './pages/site/home'
 import Login from './pages/wholesaler/loginPage.vue'
 import ContractorLogin from './pages/contractor/loginPage.vue'
 import WholesalerMypage from './pages/wholesaler/mypage.vue'
+import ItemMgmt from './components/organsms/wholesaler/itemMgmt'
+import ReceivedOrder from './components/organsms/wholesaler/receivedOrderMgmt'
+import Profile from './components/organsms/wholesaler/profileMgmt'
+import Email from './components/organsms/wholesaler/emailMgmt'
+import Password from './components/organsms/wholesaler/passwordMgmt'
 
 //import SignOut from './components/signOut'
 
@@ -28,58 +33,58 @@ const routes= [
     meta: { requiresAuth: true },
     children: [
       {
-        name: 'floors',
         path: '/floors',
+        name: 'floors',
         component: Home
       },
       {
-        name: 'doors',
         path: '/doors',
+        name: 'doors',
         component: Home
       }, {
-        name: 'features',
         path: '/features',
+        name: 'features',
         component: Home
       }, {
-        name: 'wetareas',
         path: '/wetareas',
+        name: 'wetareas',
         component: Home
       }, {
-        name: 'others',
         path: '/others',
+        name: 'others',
         component: Home
       },
     ]
   },
   {
-    path: 'wholesaler/mypage/',
+    path: '/wholesaler/mypage',
     name: 'wholesalerMypage',
     component: WholesalerMypage,
     children: [
       {
-        path: '/items',
-        name: 'wholesalerMypage',
-        component: WholesalerMypage
+        path: 'items',
+        name: 'items',
+        component: ItemMgmt
       },
       {
-        path: '/received_order',
-        name: 'wholesalerMypage',
-        component: WholesalerMypage
+        path: 'received_order',
+        name: 'receivedOrder',
+        component: ReceivedOrder
       },
       {
-        path: '/profile',
-        name: 'wholesalerMypage',
-        component: WholesalerMypage
+        path: 'profile',
+        name: 'profile',
+        component: Profile
       },
       {
-        path: '/email',
-        name: 'wholesalerMypage',
-        component: WholesalerMypage
+        path: 'email',
+        name: 'email',
+        component: Email
       },
       {
-        path: '/password',
-        name: 'wholesalerMypage',
-        component: WholesalerMypage
+        path: 'password',
+        name: 'password',
+        component: Password
       },
     ]
   },

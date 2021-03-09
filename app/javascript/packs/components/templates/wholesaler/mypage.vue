@@ -4,19 +4,19 @@
       <Navbar />
     </div>
     <div>
-      <h2>床材</h2>
-      <ItemList />
+      <router-view />
     </div>
   </div>
 </template>
 
 <script>
-import Navbar from '../../organsms/sideNav/navbar.vue'
-import ItemList from '../../organsms/itemlist/itemlist.vue'
+import Navbar from '../../organsms/sideNav/navbar'
+import ItemMgmt from '../../organsms/wholesaler/itemMgmt'
 export default {
   components: {
     Navbar,
-    ItemList
+    // eslint-disable-next-line vue/no-unused-components
+    ItemMgmt
   },
   currentGetter(){
     return this.$store.getters.data
@@ -25,14 +25,14 @@ export default {
 </script>
 
 <style scoped lang="sass">
-.main {
-    background: pink;
-    width: 60%;
-    margin-right: 20%;
-}
 .wrapper{
   width: 100%;
   display: flex;
   justify-content: center;
+}
+.main {
+    background: pink;
+    width: 60%;
+    margin-right: 20%;
 }
 </style>

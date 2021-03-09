@@ -9,22 +9,6 @@ import Home from '../../components/templates/site/homePage.vue'
 export default {
   components: {
     Home
-  },
-  currentGetter(){
-    return this.$store.getters.data
   }
 }
 </script>
-
-<style scoped lang="sass">
-.main {
-    background: pink;
-    width: 60%;
-    margin-right: 20%;
-}
-.wrapper{
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-</style>
