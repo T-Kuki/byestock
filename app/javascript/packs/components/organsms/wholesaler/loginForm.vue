@@ -1,32 +1,19 @@
 <template>
   <div class="login_container">
     <form @submit.prevent="login()">
-      <div class="form_block">
-        <ValidationProvider
-          v-slot="{ errors }"
-          rules="required">
-          <label class="form_label">Email</label>
-          <input
-            v-model="email"
-            class="form_input"
-            type="text">
-          <span class="err_msg">{{ errors[0] }}</span>
-        </ValidationProvider>
-      </div>
+      <InputForm
+        v-model="email"
+        label="メールアドレス"
+        placeholder="メールアドレス"
+        name="email"
+        type="text" />
       <br>
-      <div class="form_block">
-        <ValidationProvider
-          v-slot="{ errors }"
-          rules="required">
-          <label class="form_label">Password</label>
-          <input
-            v-model="password"
-            class="form_input"
-            name="password"
-            type="password">
-          <span class="err_msg">{{ errors[0] }}</span>
-        </ValidationProvider>
-      </div>
+      <InputForm
+        v-model="password"
+        label="パスワード"
+        placeholder="パスワード"
+        name="password"
+        type="password" />
       <br>
       <button
         class="login_button"
@@ -35,7 +22,7 @@
       </button>
     </form>
     <router-link
-      :to="{ name: 'shopLogin'}"
+      :to="{ name: 'contractorLogin'}"
       class="shop_login_link">
       工務店様はこちらからログイン
     </router-link>
@@ -43,24 +30,27 @@
 </template>
 
 <script>
-import { ValidationProvider } from 'vee-validate'
+import InputForm from '../../molecules/input/inputForm'
 export default {
   components: {
-    ValidationProvider
+    InputForm
   },
   data: function(){
     return {
-      value: null,
-      dialog: false,
       email: '',
       password: '',
-     
     }
   },
   methods: {  
     login() {
       this.$store.dispatch('login', {email: this.email, password: this.password})
       this.$router.push({ name: 'home'})
+    },
+    changeEmail(val) {
+      this.emailValue = val
+    },
+    changePassword(val) {
+      this.passwordValue = val
     }
   }
 }

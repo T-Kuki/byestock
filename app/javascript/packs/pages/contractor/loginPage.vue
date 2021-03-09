@@ -1,13 +1,13 @@
 <template>
-  <ShopLogin />
+  <ContractorLogin />
 </template>
 
 <script>
-import ShopLogin from '../../components/shopUser/shopLoginForm'
+import ContractorLogin from '../../components/templates/contractor/loginPage'
 
 export default {
   components: {
-    ShopLogin,
+    ContractorLogin,
   },
   computed: {
     currentUser() {

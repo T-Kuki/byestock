@@ -35,7 +35,7 @@
       </button>
     </form>
     <a
-      :to="{ name: 'shopLogin'}">
+      :to="{ name: 'contractorLogin'}">
       class="shop_login_link">工務店様はこちらからログイン</a>
   </div>
 </template>

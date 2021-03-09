@@ -1,51 +1,92 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from './pages/site/home'
-import Login from './pages/wholesaler/login.vue'
-import ShopLogin from './pages/shopUser/login.vue'
 import Store from './store/store.js'
+import Home from './pages/site/home'
+import Login from './pages/wholesaler/loginPage.vue'
+import ContractorLogin from './pages/contractor/loginPage.vue'
+import WholesalerMypage from './pages/wholesaler/mypage.vue'
+import ItemMgmt from './components/organsms/wholesaler/itemMgmt'
+import ReceivedOrder from './components/organsms/wholesaler/receivedOrderMgmt'
+import Profile from './components/organsms/wholesaler/profileMgmt'
+import Email from './components/organsms/wholesaler/emailMgmt'
+import Password from './components/organsms/wholesaler/passwordMgmt'
+
 //import SignOut from './components/signOut'
 
 Vue.use(VueRouter)
 
 const routes= [
   {
-    path: '/login',
-    name: 'login',
+    path: 'wholesaler/login',
+    name: 'wholesalerLogin',
     component: Login
   },
   {
-    path: '/shop_login',
-    name: 'shopLogin',
-    component: ShopLogin
+    path: 'contractor/login',
+    name: 'contractorLogin',
+    component: ContractorLogin
   },
-  {
-    name: 'home',
+  { 
     path: '/',
+    name: 'home',
     component: Home,
-    meta: { requiresAuth: true }
+    meta: { requiresAuth: true },
+    children: [
+      {
+        path: '/floors',
+        name: 'floors',
+        component: Home
+      },
+      {
+        path: '/doors',
+        name: 'doors',
+        component: Home
+      }, {
+        path: '/features',
+        name: 'features',
+        component: Home
+      }, {
+        path: '/wetareas',
+        name: 'wetareas',
+        component: Home
+      }, {
+        path: '/others',
+        name: 'others',
+        component: Home
+      },
+    ]
   },
   {
-    name: 'floors',
-    path: '/floors',
-    component: Home
-  },
-  {
-    name: 'doors',
-    path: '/doors',
-    component: Home
-  }, {
-    name: 'features',
-    path: '/features',
-    component: Home
-  }, {
-    name: 'wetareas',
-    path: '/wetareas',
-    component: Home
-  }, {
-    name: 'others',
-    path: '/others',
-    component: Home
+    path: '/wholesaler/mypage',
+    name: 'wholesalerMypage',
+    component: WholesalerMypage,
+    children: [
+      {
+        path: 'items',
+        name: 'items',
+        component: ItemMgmt
+      },
+      {
+        path: 'received_order',
+        name: 'receivedOrder',
+        component: ReceivedOrder
+      },
+      {
+        path: 'profile',
+        name: 'profile',
+        component: Profile
+      },
+      {
+        path: 'email',
+        name: 'email',
+        component: Email
+      },
+      {
+        path: 'password',
+        name: 'password',
+        component: Password
+      },
+    ]
   },
 
 ]
@@ -58,7 +99,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth) && !Store.state.data) {
-    next({ path: '/login', query: { redirect: to.fullPath } })
+    next({ name: 'wholesalerLogin', query: { redirect: to.fullPath } })
   } else {
     next()
   }

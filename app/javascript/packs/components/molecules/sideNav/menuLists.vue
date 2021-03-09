@@ -1,23 +1,12 @@
 <template>
-  <div class="sidebar">
-    <h1 class="title">
-      byestock
-    </h1>
-    <p> {{ currentUser.email }} さん</p>
-    <div>
-      <router-link
-        v-for="item in items"
-        :key="item.title"
-        class="menu_items"
-        :to="{ name: item.link }">
-        {{ item.title }}
-      </router-link>
-      <button
-        class="logout_btn"
-        @click="logout">
-        ログアウト
-      </button>
-    </div>
+  <div>
+    <router-link
+      v-for="item in items"
+      :key="item.title"
+      class="menu_items"
+      :to="{ name: item.link }">
+      {{ item.title }}
+    </router-link>
   </div>
 </template>
 
@@ -52,7 +41,7 @@ export default {
 .title {
     padding: 3px;
 }
-.sidebar{
+.sideNavbar{
     height: 100%;
     width: 20%;
     text-align: center;
@@ -62,6 +51,7 @@ export default {
     overflow: auto;
 }
 .menu_items{
+  color: white;
   display: block;
   margin:2rem;
 }
