@@ -15,7 +15,7 @@ Rails.application.routes.draw do
           format: :json
      }
      resources :wholesalers, :only => [:show,:edit]
-     resources :posts, only: [:index, :create, :destroy]
+     resources :items, only: [:index, :create, :destroy]
     end
   end
 end

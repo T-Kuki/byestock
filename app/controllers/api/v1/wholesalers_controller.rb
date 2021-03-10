@@ -5,7 +5,7 @@ class Api::V1::WholesalersController < ApiController
   
 def show
   @wholesaler = Wholesaler.find(params[:id])
-  @sites = @wholesaler.sites
+  @items = @wholesaler.items
 end
 
 def edit
