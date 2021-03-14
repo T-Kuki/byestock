@@ -1,11 +1,10 @@
-class Api::V1::WholesalersController < ApiController
+class Api::V1::WholesalersController < ApplicationController
   before_action :authenticate_api_v1_wholesaler!
   before_action :current_api_v1_wholesaler
   before_action :ensure_correct_wholesaler
   
 def show
-  @wholesaler = Wholesaler.find(params[:id])
-  @items = @wholesaler.items
+  @items = current_api_v1_wholesaler.items
 end
 
 def edit

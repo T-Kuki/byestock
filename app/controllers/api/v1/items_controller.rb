@@ -1,12 +1,13 @@
-class Api::V1::ItemsController < ApiController
+class Api::V1::ItemsController < ApplicationController
+  before_action :authenticate_api_v1_wholesaler!
     def index
-      render json: Item.all, methods: [:image_url] # ここを変更
+      render json: Item.all, methods: [:image_url]
     end
 
     def create
-      item = Item.new(item_params)
+      item = current_api_v1_wholesaler.items.build(item_params)
       if item.save
-        render json: item, methods: [:image_url] # ここを変更
+        render json: item, methods: [:image_url]
       else
         render json: item.errors, status: 422
       end
@@ -21,7 +22,7 @@ class Api::V1::ItemsController < ApiController
     private
 
     def item_params
-      params.permit(:title, :image)
+      params.permit(:maker,:name, :genre, :quantity, :condition, :price, :detail, :image)
     end
 
 end
