@@ -20,6 +20,7 @@ def ensure_correct_wholesaler
   @wholesaler = Wholesaler.find(params[:id])
   if @wholesaler.id != @current_api_v1_wholesaler.id
   redirect_to  new_api_v1_wholesaler_session_url
+  debugger
   end
 end
 

@@ -1,0 +1,1 @@
+json.extract! @item, :maker,:name, :genre, :quantity, :condition, :price, :detail

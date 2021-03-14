@@ -25,7 +25,7 @@
         <tbody>
           <tr
             v-for="item in getItems"
-            :key="item.no">
+            :key="item.id">
             <td>{{ item.no }}</td>
             <td>{{ item.maker }}</td>
             <td>{{ item.name | omittedText }}</td>
@@ -36,7 +36,7 @@
               <MyButton
                 type="success"
                 size="small"
-                @buttonClick="newItem">
+                @buttonClick="editItem(item.id)">
                 編集
               </MyButton>
               <MyButton
@@ -112,6 +112,10 @@ export default {
     },
     newItem() {
       this.$router.push({ name: 'newItem'})
+    },
+    editItem(getItemId) {
+      console.log('取得したID: '+getItemId)
+      this.$router.push({ name: 'editItem', params: { itemId: getItemId }})
     }
   },
 }

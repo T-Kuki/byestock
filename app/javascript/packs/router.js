@@ -11,6 +11,7 @@ import Profile from './components/organsms/wholesaler/profileMgmt'
 import Email from './components/organsms/wholesaler/emailMgmt'
 import Password from './components/organsms/wholesaler/passwordMgmt'
 import NewItem from './components/organsms/wholesaler/newItem'
+import EditItem from './components/organsms/wholesaler/editItem'
 
 //import SignOut from './components/signOut'
 
@@ -72,6 +73,11 @@ const routes= [
         path: 'items/new',
         name: 'newItem',
         component: NewItem,
+      },
+      {
+        path: 'items/:itemId/edit',
+        name: 'editItem',
+        component: EditItem,
       },
       {
         path: 'received_order',

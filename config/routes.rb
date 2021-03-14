@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get '/login', to: 'page#index'
   get '/wholesaler/mypage/items', to: 'page#index'
   get '/wholesaler/mypage/items/new', to: 'page#index'
+  get '/wholesaler/mypage/items/:id/edit', to: 'page#index'
   get '/wholesaler/mypage/received_order', to: 'page#index'
   get '/wholesaler/mypage/profile', to: 'page#index'
   get '/wholesaler/mypage/email', to: 'page#index'
@@ -16,7 +17,7 @@ Rails.application.routes.draw do
           format: :json
      }
      resources :wholesalers, :only => [:show,:edit] do
-      resources :items, only: [:index, :create, :destroy]
+      resources :items, only: [:index, :create,:edit,:update, :destroy]
      end
     end
   end
