@@ -24,7 +24,7 @@
         </thead>
         <tbody>
           <tr
-            v-for="item in getItems"
+            v-for="item in sliceItems"
             :key="item.id">
             <td>{{ item.no }}</td>
             <td>{{ item.maker }}</td>
@@ -93,7 +93,7 @@ export default {
     currentWholesaler() {
       return this.$store.state.data
     },
-    getItems: function () {
+    sliceItems: function () {
       let start = (this.currentPage - 1) * this.perPage
       let end = this.currentPage * this.perPage
       return this.items.slice(start, end)
@@ -103,13 +103,17 @@ export default {
     },
   },
   beforeMount () {
-    axios
-      .get(`/api/v1/wholesalers/${this.currentWholesaler.id}.json`, {headers: this.$store.state.headers, data: {} })
-      .then(response => this.items = response.data)
+    this.getItems().then(result => {
+      this.items = result
+    })
   },
   methods: {
     paginateClickCallback: function (pageNum) {
       this.currentPage = Number(pageNum)
+    },
+    getItems: async function() {
+      const res = await axios.get(`/api/v1/wholesalers/${this.currentWholesaler.id}.json`, {headers: this.$store.state.headers, data: {} })
+      return res.data
     },
     newItem() {
       this.$router.push({ name: 'newItem'})
@@ -117,20 +121,19 @@ export default {
     editItem(getItemId) {
       this.$router.push({ name: 'editItem', params: { itemId: getItemId }})
     },
-    deleteItem(getItemId) {
-      axios
-        .delete(`/api/v1/wholesalers/${this.currentWholesaler.id}/items/${getItemId}.json`, { headers: this.$store.state.headers })
-        .then(response => {
-          let e = response.data
-          this.$router.push({ name: 'items', params: { id: e.id } })
+    deleteItem: async function(getItemId) {
+      try {
+        await axios .delete(`/api/v1/wholesalers/${this.currentWholesaler.id}/items/${getItemId}.json`, { headers: this.$store.state.headers })
+        this.getItems().then(result => {
+          this.items = result
         })
-        .catch(error => {
-          console.error(error)
-          if (error.response.data && error.response.data.errors) {
-            this.errors = error.response.data.errors
-          }
-        })
-    }
+      } catch (err){
+        console.error('エラー発生'+ err)
+        if (err.response.data && err.response.data.errors) {
+          this.errors = err.response.data.errors
+        }
+      }
+    },
   },
 }
 </script>

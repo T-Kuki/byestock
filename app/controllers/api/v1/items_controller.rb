@@ -1,6 +1,6 @@
 class Api::V1::ItemsController < ApplicationController
   before_action :authenticate_api_v1_wholesaler!
-  before_action :ensure_correct_wholesaler,{only: [:create, :edit,:update,:destroy]}
+  before_action :ensure_correct_wholesaler,{only: [:edit,:update,:destroy]}
 
     def index
       render json: Item.all, methods: [:image_url]
