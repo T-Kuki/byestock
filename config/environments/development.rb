@@ -72,6 +72,8 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   config.x.webpacker[:dev_server_host] = "http://localhost:3000"
+  
+  config.web_console.whitelisted_ips = '0.0.0.0/0'
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true

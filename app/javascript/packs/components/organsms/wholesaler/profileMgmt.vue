@@ -91,7 +91,7 @@ form{
 .items{
   display: flex;
   flex-wrap: wrap;
-  width: 1200px;
+  width: 1100px;
   margin: 20px;
   justify-content: space-around;
 

@@ -8,15 +8,13 @@
       <label class="form_label">
         <span v-if="$slots.label"><slot name="label" /></span>
         <span v-else-if="label">{{ label }}</span>
-      </label>
-      <input
-        :type="type"
+      </label><br>
+      <v-select
         :name="name"
-        :value="value"
         :placeholder="placeholder"
         class="form_input"
         :class="[border]"
-        @input="updateValue">
+        :options="options" />
       <span class="err_msg">{{ errors[0] }}</span>
     </ValidationProvider>
   </div>
@@ -34,10 +32,16 @@ export default {
     width: { type: String, default: '' },
     border: { type: String, default: '' },
     value: { type: String, required: true },
+    options: { type: Array, default: () => {}, },
     type: { type: String, required: true },
     name: { type: String, required: true },
     // eslint-disable-next-line vue/require-default-prop
     placeholder: { type: String, required: false }
+  },
+  data: function() {
+    return { 
+      selected: '',
+    }
   },
   methods: {
     updateValue: function(e) {
@@ -47,10 +51,6 @@ export default {
 }
 </script>
 <style scoped>
-.login_container{
-  margin: 0 auto;
-  text-align: center;
-}
 label, input {
   color: #2699FB;
   display: block;
@@ -75,23 +75,13 @@ label, input {
   border-radius: .3rem;
   width:100%;
   font-size:16px;
- border: 1px solid rgba(60,60,60,.26);
-  padding:.5rem;
+  border:1px solid #aaa;
 }
 .form_input.noneBorder{
   border:none;
 }
-.login_button{
-  color: #2699FB;
-  margin-top: 2rem;
-  padding: .2rem 2rem;
-}
 .err_msg{
   color: red;
   float: left;
-}
-.shop_login_link{
-  color: #000000;
-  border-bottom: 1px solid #000000;
 }
 </style>

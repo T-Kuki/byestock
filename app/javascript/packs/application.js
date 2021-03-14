@@ -11,6 +11,8 @@ import 'channels'
 import {ValidationProvider, extend } from 'vee-validate'
 import { required } from 'vee-validate/dist/rules'
 import Paginate from 'vuejs-paginate'
+import vSelect from 'vue-select'
+import 'vue-select/dist/vue-select.css' 
 
 Rails.start()
 Turbolinks.start()
@@ -18,6 +20,7 @@ ActiveStorage.start()
 Vue.use(axios)
 Vue.use(Vuex)
 Vue.component('Paginate', Paginate)
+Vue.component('VSelect', vSelect)
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios
 extend('required', {

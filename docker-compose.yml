@@ -17,6 +17,9 @@ services:
     command: bundle exec foreman start -f Procfile
     volumes:
       - .:/byestock
+      - bundle_path:/bundle
+    environment:
+      - BUNDLE_PATH=/bundle
     ports:
       - '3000:3000'
       - '8000:8000'
@@ -25,5 +28,6 @@ services:
     stdin_open: true
     tty: true
 volumes:
+  bundle_path:
   mysql-data:
     driver: local

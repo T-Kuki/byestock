@@ -9,14 +9,14 @@
         <span v-if="$slots.label"><slot name="label" /></span>
         <span v-else-if="label">{{ label }}</span>
       </label>
-      <input
+      <textarea
         :type="type"
         :name="name"
         :value="value"
         :placeholder="placeholder"
         class="form_input"
         :class="[border]"
-        @input="updateValue">
+        @input="updateValue" />
       <span class="err_msg">{{ errors[0] }}</span>
     </ValidationProvider>
   </div>
@@ -75,7 +75,7 @@ label, input {
   border-radius: .3rem;
   width:100%;
   font-size:16px;
- border: 1px solid rgba(60,60,60,.26);
+  border: 1px solid rgba(60,60,60,.26);
   padding:.5rem;
 }
 .form_input.noneBorder{

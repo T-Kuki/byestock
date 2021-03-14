@@ -10,6 +10,8 @@ import ReceivedOrder from './components/organsms/wholesaler/receivedOrderMgmt'
 import Profile from './components/organsms/wholesaler/profileMgmt'
 import Email from './components/organsms/wholesaler/emailMgmt'
 import Password from './components/organsms/wholesaler/passwordMgmt'
+import NewItem from './components/organsms/wholesaler/newItem'
+import EditItem from './components/organsms/wholesaler/editItem'
 
 //import SignOut from './components/signOut'
 
@@ -17,12 +19,12 @@ Vue.use(VueRouter)
 
 const routes= [
   {
-    path: 'wholesaler/login',
+    path: '/wholesaler/login',
     name: 'wholesalerLogin',
     component: Login
   },
   {
-    path: 'contractor/login',
+    path: '/contractor/login',
     name: 'contractorLogin',
     component: ContractorLogin
   },
@@ -60,11 +62,22 @@ const routes= [
     path: '/wholesaler/mypage',
     name: 'wholesalerMypage',
     component: WholesalerMypage,
+    meta: { requiresAuth: true },
     children: [
       {
         path: 'items',
         name: 'items',
-        component: ItemMgmt
+        component: ItemMgmt,
+      },
+      {
+        path: 'items/new',
+        name: 'newItem',
+        component: NewItem,
+      },
+      {
+        path: 'items/:itemId/edit',
+        name: 'editItem',
+        component: EditItem,
       },
       {
         path: 'received_order',

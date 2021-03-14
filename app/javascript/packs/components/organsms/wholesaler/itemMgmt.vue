@@ -2,6 +2,12 @@
   <div class="items">
     <div class="l-wrapper">
       <h2>商品管理</h2>
+      <MyButton
+        type="info"
+        float="right"
+        @buttonClick="newItem">
+        商品追加
+      </MyButton>
       <table class="table">
         <thead>
           <tr>
@@ -11,18 +17,35 @@
             <th>数量</th>
             <th>価格</th>
             <th>商品詳細</th>
+            <th style="width: 18%;">
+              管理
+            </th>
           </tr>
         </thead>
         <tbody>
           <tr
-            v-for="item in getItems"
-            :key="item.no">
+            v-for="item in sliceItems"
+            :key="item.id">
             <td>{{ item.no }}</td>
             <td>{{ item.maker }}</td>
             <td>{{ item.name | omittedText }}</td>
             <td>{{ item.quantity }}</td>
             <td>{{ item.price }}</td>
             <td>{{ item.detail | omittedText }}</td>
+            <td>
+              <MyButton
+                type="success"
+                size="small"
+                @buttonClick="editItem(item.id)">
+                編集
+              </MyButton>
+              <MyButton
+                type="danger"
+                size="small"
+                @buttonClick="deleteItem(item.id)">
+                削除
+              </MyButton>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -46,28 +69,31 @@
 </template>
 
 <script>
+import MyButton from '../../atoms/button'
+import axios from 'axios'
 export default {
+  components: {
+    MyButton
+  },
   filters: {
     omittedText(text) {
-      // 11文字目以降は"…"
-      return text.length > 15 ? text.slice(0, 15) + '…' : text
+      if (text){
+        return text.length > 15 ? text.slice(0, 15) + '…' : text
+      }
     }
   },
   data: function() {
     return {
-      items: [
-        {no: '1', maker: 'LIXIL', name: 'Dフロア', quantity: '2', price: '3000', detail: '厚さ(mm)12 シリーズラシッサ 長さ(mm)1818 幅(mm)303 仕様耐干割れ処理'},
-        {no: '2', maker: 'Panasonic', name: 'オフローラ', quantity: '7', price: '200,000', detail: '厚さ(mm)12 シリーズラシッサ 長さ(mm)1818 幅(mm)303 仕様耐干割れ処理'},
-        {no: '3', maker: '大建', name: 'ここち和座', quantity: '20', price: '5,900', detail: '厚さ(mm)12 シリーズラシッサ 長さ(mm)1818 幅(mm)303 仕様耐干割れ処理'},
-        {no: '4', maker: '永大', name: 'スキスム 巾木', quantity: '2', price: '2,500', detail: '厚さ(mm)12 シリーズラシッサ 長さ(mm)1818 幅(mm)303 仕様耐干割れ処理'},
-        {no: '5', maker: '吉野石膏', name: 'タイカボード9mm', quantity: '60', price: '400', detail: '厚さ(mm)12 シリーズラシッサ 長さ(mm)1818 幅(mm)303 仕様耐干割れ処理'},
-      ],
+      items: [],
       currentPage: 1,
-      perPage: 2,
+      perPage: 4,
     }
   },
   computed: {
-    getItems: function () {
+    currentWholesaler() {
+      return this.$store.state.data
+    },
+    sliceItems: function () {
       let start = (this.currentPage - 1) * this.perPage
       let end = this.currentPage * this.perPage
       return this.items.slice(start, end)
@@ -76,9 +102,37 @@ export default {
       return Math.ceil(this.items.length / this.perPage)
     },
   },
+  beforeMount () {
+    this.getItems().then(result => {
+      this.items = result
+    })
+  },
   methods: {
     paginateClickCallback: function (pageNum) {
       this.currentPage = Number(pageNum)
+    },
+    getItems: async function() {
+      const res = await axios.get(`/api/v1/wholesalers/${this.currentWholesaler.id}.json`, {headers: this.$store.state.headers, data: {} })
+      return res.data
+    },
+    newItem() {
+      this.$router.push({ name: 'newItem'})
+    },
+    editItem(getItemId) {
+      this.$router.push({ name: 'editItem', params: { itemId: getItemId }})
+    },
+    deleteItem: async function(getItemId) {
+      try {
+        await axios .delete(`/api/v1/wholesalers/${this.currentWholesaler.id}/items/${getItemId}.json`, { headers: this.$store.state.headers })
+        this.getItems().then(result => {
+          this.items = result
+        })
+      } catch (err){
+        console.error('エラー発生'+ err)
+        if (err.response.data && err.response.data.errors) {
+          this.errors = err.response.data.errors
+        }
+      }
     },
   },
 }
@@ -88,7 +142,7 @@ export default {
 .items{
   display: flex;
   flex-wrap: wrap;
-  width: 1200px;
+  width: 1100px;
   margin: 20px;
   justify-content: space-around;
 
