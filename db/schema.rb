@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_11_154629) do
+ActiveRecord::Schema.define(version: 2021_03_14_114516) do
 
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -79,12 +79,18 @@ ActiveRecord::Schema.define(version: 2021_03_11_154629) do
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
     t.string "wholesaler_id", default: "", null: false
-    t.string "name"
     t.string "image"
     t.string "email"
     t.text "tokens"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "company_name"
+    t.string "president_name"
+    t.string "industry"
+    t.string "post_code"
+    t.string "city"
+    t.string "address"
+    t.string "phone_number"
     t.index ["confirmation_token"], name: "index_wholesalers_on_confirmation_token", unique: true
     t.index ["email"], name: "index_wholesalers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_wholesalers_on_reset_password_token", unique: true
