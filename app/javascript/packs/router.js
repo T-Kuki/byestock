@@ -111,7 +111,8 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresAuth) && !Store.state.data) {
+  if (to.matched.some(record => record.meta.requiresAuth) && !Store.state.wholesaler.headers) {
+    console.log('ストアのヘッダー: '+Store.state.wholesaler.headers)
     next({ name: 'wholesalerLogin', query: { redirect: to.fullPath } })
   } else {
     next()

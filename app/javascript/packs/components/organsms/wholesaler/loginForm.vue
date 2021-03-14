@@ -43,8 +43,8 @@ export default {
   },
   methods: {  
     login() {
-      this.$store.dispatch('login', {email: this.email, password: this.password})
-      this.$router.push({ name: 'home'})
+      this.$store.dispatch('wholesaler/login', {email: this.email, password: this.password})
+      this.$router.push(this.$route.query.redirect)
     },
     changeEmail(val) {
       this.emailValue = val

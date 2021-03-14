@@ -2,21 +2,21 @@
   <div class="items">
     <div class="l-wrapper">
       <h2>パスワード管理</h2>
-      <form @submit.prevent="login()">
-        <InputForm
-          v-model="wholesaler.oldPassword"
+      <form @submit.prevent="update()">
+        <!--<InputForm
+          v-model="currentPassword"
           label="現在のパスワード"
           placeholder="現在のパスワード"
-          name="oldPassword"
-          type="password" />
+          name="current_password"
+          type="password" /> -->
         <InputForm
-          v-model="wholesaler.newPassword"
+          v-model="password"
           label="新しいパスワード"
           placeholder="新しいパスワード"
-          name="newPassword"
+          name="password"
           type="password" />
         <InputForm
-          v-model="wholesaler.passwordComfirm"
+          v-model="passwordConfirmation"
           label="パスワード確認用"
           placeholder="パスワード確認用"
           name="passwordComfirm"
@@ -42,20 +42,33 @@ export default {
   },
   data: function() {
     return {
-      wholesaler: {},
-      name: '',
+      //currentPassword: '',
+      password: '',
+      passwordConfirmation: ''
     }
   },
   computed: {
-    currentUser() {
-      return this.$store.state.data
+    currentWholesaler() {
+      return this.$store.state.wholesaler.data
     }
   },
   mounted () {
-    axios
-      .get(`/api/v1/wholesalers/${this.currentUser.id}.json`, {headers: this.$store.state.headers, data: {} })
-      .then(response => this.wholesaler = response.data)
+    this.getProfile().then(result => {
+      this.wholesaler = result
+    })
   },
+  methods: {
+    backItems() {
+      this.$router.push({ name: 'items'})
+    },
+    getProfile: async function() {
+      const res = await axios .get(`/api/v1/wholesalers/${this.currentWholesaler.id}.json`, {headers: this.$store.state.wholesaler.headers, data: {} })
+      return res.data.wholesaler
+    },
+    update(){
+      this.$store.dispatch('wholesaler/updatePassword', {password: this.password, password_confirmation: this.passwordConfirmation})
+    }
+  }
 }
 </script>
 

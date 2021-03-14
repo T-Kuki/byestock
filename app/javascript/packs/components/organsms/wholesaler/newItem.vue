@@ -107,12 +107,12 @@ export default {
   },
   computed: {
     currentWholesaler() {
-      return this.$store.state.data
+      return this.$store.state.wholesaler.data
     }
   },
   mounted () {
     axios
-      .get(`/api/v1/wholesalers/${this.currentWholesaler.id}.json`, {headers: this.$store.state.headers, data: {} })
+      .get(`/api/v1/wholesalers/${this.currentWholesaler.id}.json`, {headers: this.$store.state.wholesaler.headers, data: {} })
       .then(response => this.wholesaler = response.data)
   },
   methods: {
@@ -121,7 +121,7 @@ export default {
     },
     createItems(){
       axios
-        .post(`/api/v1/wholesalers/${this.currentWholesaler.id}/items`, this.items, { headers: this.$store.state.headers })
+        .post(`/api/v1/wholesalers/${this.currentWholesaler.id}/items`, this.items, { headers: this.$store.state.wholesaler.headers })
         .then(response => {
           let e = response.data
           this.$router.push({ name: 'items', params: { id: e.id } })

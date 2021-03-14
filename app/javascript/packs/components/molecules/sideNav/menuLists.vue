@@ -25,12 +25,12 @@ export default {
   },
   computed: {
     currentUser() {
-      return this.$store.state.data
+      return this.$store.state.wholesaler.data
     }
   },
   methods: {
     logout() {
-      this.$store.dispatch('logout')
+      this.$store.dispatch('wholesaler/logout')
       this.$router.push({ name: 'login'})
     }
   }

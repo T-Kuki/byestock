@@ -3,12 +3,12 @@ class Api::V1::Auth::RegistrationsController < DeviseTokenAuth::RegistrationsCon
 
   private
 
-  # :company( 企業名 )を追加できるようにpravateメソッドに修正を加える
   def sign_up_params
-    params.permit(:name, :email, :wholesaler_id, :password, :password_confirmation)
+    params.permit(:company_name, :president_name, :industry, :post_code, :city, :address, :phone_number,
+       :email, :wholesaler_id, :password, :password_confirmation)
   end
 
   def account_update_params
-    params.permit(:name, :email)
+    params.permit(:email, :company_name, :president_name, :industry, :post_code, :city, :address, :phone_number, :password, :password_confirmation))
   end
 end

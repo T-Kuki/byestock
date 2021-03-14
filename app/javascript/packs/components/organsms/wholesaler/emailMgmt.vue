@@ -6,9 +6,9 @@
         <label class="form_label">
           現在のメールアドレス
         </label>
-        <h4>test@test.co.jp</h4>
+        <h4>{{ currentWholesaler.email }}</h4>
       </div>
-      <form @submit.prevent="login()">
+      <form @submit.prevent="update()">
         <InputForm
           v-model="wholesaler.email"
           label="メールアドレス"
@@ -41,15 +41,27 @@ export default {
     }
   },
   computed: {
-    currentUser() {
-      return this.$store.state.data
+    currentWholesaler() {
+      return this.$store.state.wholesaler.data
     }
   },
   mounted () {
-    axios
-      .get(`/api/v1/wholesalers/${this.currentUser.id}.json`, {headers: this.$store.state.headers, data: {} })
-      .then(response => this.wholesaler = response.data)
+    this.getProfile().then(result => {
+      this.wholesaler = result
+    })
   },
+  methods: {
+    backItems() {
+      this.$router.push({ name: 'items'})
+    },
+    getProfile: async function() {
+      const res = await axios .get(`/api/v1/wholesalers/${this.currentWholesaler.id}.json`, {headers: this.$store.state.wholesaler.headers, data: {} })
+      return res.data.wholesaler
+    },
+    update(){
+      this.$store.dispatch('wholesaler/updateProfile', this.wholesaler)
+    }
+  }
 }
 </script>
 

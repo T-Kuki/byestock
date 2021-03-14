@@ -4,6 +4,7 @@ class Api::V1::WholesalersController < ApplicationController
   before_action :ensure_correct_wholesaler
   
 def show
+  @wholesaler = current_api_v1_wholesaler
   @items = current_api_v1_wholesaler.items
 end
 

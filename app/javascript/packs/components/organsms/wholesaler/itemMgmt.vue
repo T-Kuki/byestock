@@ -91,7 +91,7 @@ export default {
   },
   computed: {
     currentWholesaler() {
-      return this.$store.state.data
+      return this.$store.state.wholesaler.data
     },
     sliceItems: function () {
       let start = (this.currentPage - 1) * this.perPage
@@ -112,8 +112,8 @@ export default {
       this.currentPage = Number(pageNum)
     },
     getItems: async function() {
-      const res = await axios.get(`/api/v1/wholesalers/${this.currentWholesaler.id}.json`, {headers: this.$store.state.headers, data: {} })
-      return res.data
+      const res = await axios.get(`/api/v1/wholesalers/${this.currentWholesaler.id}.json`, {headers: this.$store.state.wholesaler.headers, data: {} })
+      return res.data.item
     },
     newItem() {
       this.$router.push({ name: 'newItem'})
@@ -123,7 +123,7 @@ export default {
     },
     deleteItem: async function(getItemId) {
       try {
-        await axios .delete(`/api/v1/wholesalers/${this.currentWholesaler.id}/items/${getItemId}.json`, { headers: this.$store.state.headers })
+        await axios .delete(`/api/v1/wholesalers/${this.currentWholesaler.id}/items/${getItemId}.json`, { headers: this.$store.state.wholesaler.headers })
         this.getItems().then(result => {
           this.items = result
         })

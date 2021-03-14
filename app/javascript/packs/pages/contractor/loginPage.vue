@@ -11,7 +11,7 @@ export default {
   },
   computed: {
     currentUser() {
-      return this.$store.state.data
+      return this.$store.state.wholesaler.data
     }
   }
 }
