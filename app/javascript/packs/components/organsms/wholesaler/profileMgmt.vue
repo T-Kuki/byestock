@@ -2,7 +2,7 @@
   <div class="items">
     <div class="l-wrapper">
       <h2>基本情報</h2>
-      <form @submit.prevent="updateProfile()">
+      <form @submit.prevent="update()">
         <InputForm
           v-model="wholesaler.company_name"
           label="会社名"
@@ -97,8 +97,8 @@ export default {
       const res = await axios .get(`/api/v1/wholesalers/${this.currentWholesaler.id}.json`, {headers: this.$store.state.wholesaler.headers, data: {} })
       return res.data.wholesaler
     },
-    updateProfile(){
-      this.$store.dispatch('updateProfile', this.wholesaler)
+    update(){
+      this.$store.dispatch('wholesaler/updateProfile', this.wholesaler)
     }
   }
 }

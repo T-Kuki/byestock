@@ -57,7 +57,7 @@ export default {
   },
   methods: {  
     login() {
-      this.$store.wholesaler.dispatch('login', {email: this.email, password: this.password})
+      this.$store.dispatch('login', {email: this.email, password: this.password})
       this.$router.push({ name: 'home'})
     }
   }

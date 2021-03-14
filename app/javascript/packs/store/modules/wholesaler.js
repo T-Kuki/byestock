@@ -65,7 +65,7 @@ export default {
           }
         })
     },
-    //ユーザー名を更新
+    //ユーザー情報を更新
     updateProfile(context, params) {
       axios
         .put('/api/v1/auth.json', params, { headers: context.state.headers })
@@ -79,6 +79,22 @@ export default {
             this.errors = error.response.data.errors
           }
         })
-    }
+    },
+    
+    //ユーザーメールアドレスを更新
+    updatePassword(context, params) {
+      axios
+        .put('/api/v1/auth/password.json', params, { headers: context.state.headers })
+        .then(function (response) {
+          context.commit('set_header', response.headers)
+          context.commit('set_data', response.data)
+        })
+        .catch(error => {
+          console.error(error)
+          if (error.response.data && error.response.data.errors) {
+            this.errors = error.response.data.errors
+          }
+        })
+    },
   }
 }
