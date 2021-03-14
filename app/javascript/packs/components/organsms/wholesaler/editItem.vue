@@ -99,15 +99,15 @@ export default {
   },
   computed: {
     currentWholesaler() {
-      return this.$store.state.data
+      return this.$store.state.wholesaler.data
     }
   },
   mounted () {
     axios
-      .get(`/api/v1/wholesalers/${this.currentWholesaler.id}.json`, {headers: this.$store.state.headers, data: {} })
+      .get(`/api/v1/wholesalers/${this.currentWholesaler.id}.json`, {headers: this.$store.state.wholesaler.headers, data: {} })
       .then(response => this.wholesaler = response.data)
     axios
-      .get(`/api/v1/wholesalers/${this.currentWholesaler.id}/items/${this.$route.params.itemId}/edit.json`, {headers: this.$store.state.headers, data: {} })
+      .get(`/api/v1/wholesalers/${this.currentWholesaler.id}/items/${this.$route.params.itemId}/edit.json`, {headers: this.$store.state.wholesaler.headers, data: {} })
       .then(response => this.item = response.data)
   },
   methods: {
@@ -116,7 +116,7 @@ export default {
     },
     updateItem(){
       axios
-        .put(`/api/v1/wholesalers/${this.currentWholesaler.id}/items/${this.$route.params.itemId}.json`, this.item, { headers: this.$store.state.headers })
+        .put(`/api/v1/wholesalers/${this.currentWholesaler.id}/items/${this.$route.params.itemId}.json`, this.item, { headers: this.$store.state.wholesaler.headers })
         .then(response => {
           let e = response.data
           this.$router.push({ name: 'items', params: { id: e.id } })

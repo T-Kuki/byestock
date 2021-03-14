@@ -48,12 +48,12 @@ export default {
   },
   computed: {
     currentUser() {
-      return this.$store.state.data
+      return this.$store.state.wholesaler.data
     }
   },
   mounted () {
     axios
-      .get(`/api/v1/wholesalers/${this.currentUser.id}.json`, {headers: this.$store.state.headers, data: {} })
+      .get(`/api/v1/wholesalers/${this.currentUser.id}.json`, {headers: this.$store.state.wholesaler.headers, data: {} })
       .then(response => this.wholesaler = response.data)
   },
 }

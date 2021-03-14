@@ -19,7 +19,6 @@ export default {
   height: 100%;
   text-align: center;
   background-image: url("../../../images/airbnbimg.jpg");
-
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
