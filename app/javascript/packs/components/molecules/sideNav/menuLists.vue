@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     logout() {
-      this.$store.dispatch('logout')
+      this.$store.dispatch('wholesaler/logout')
       this.$router.push({ name: 'login'})
     }
   }

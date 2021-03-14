@@ -39,8 +39,8 @@ export default {
   },
   methods: {
     logout() {
-      this.$store.dispatch('logout')
-      this.$router.push({ name: 'login'})
+      this.$store.dispatch('wholesaler/logout')
+      this.$router.push('wholesaler/login')
     },
     showMypage(){
       this.$router.push({ name: 'items'})
