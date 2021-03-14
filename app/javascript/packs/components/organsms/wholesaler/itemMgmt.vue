@@ -41,7 +41,8 @@
               </MyButton>
               <MyButton
                 type="danger"
-                size="small">
+                size="small"
+                @buttonClick="deleteItem(item.id)">
                 削除
               </MyButton>
             </td>
@@ -114,8 +115,21 @@ export default {
       this.$router.push({ name: 'newItem'})
     },
     editItem(getItemId) {
-      console.log('取得したID: '+getItemId)
       this.$router.push({ name: 'editItem', params: { itemId: getItemId }})
+    },
+    deleteItem(getItemId) {
+      axios
+        .delete(`/api/v1/wholesalers/${this.currentWholesaler.id}/items/${getItemId}.json`, { headers: this.$store.state.headers })
+        .then(response => {
+          let e = response.data
+          this.$router.push({ name: 'items', params: { id: e.id } })
+        })
+        .catch(error => {
+          console.error(error)
+          if (error.response.data && error.response.data.errors) {
+            this.errors = error.response.data.errors
+          }
+        })
     }
   },
 }
