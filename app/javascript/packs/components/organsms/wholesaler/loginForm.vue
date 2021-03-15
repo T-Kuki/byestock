@@ -18,7 +18,7 @@
       <button
         class="login_button"
         type="submit">
-        Login
+        ログイン
       </button>
     </form>
     <router-link

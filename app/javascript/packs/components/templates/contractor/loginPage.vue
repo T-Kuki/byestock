@@ -1,22 +1,35 @@
 <template>
-  <ContractorLogin />
+  <div>
+    <LoginForm />
+  </div>
 </template>
 
 <script>
-import ContractorLogin from '../../organsms/contractor/loginForm.vue'
+import LoginForm from '../../organsms/contractor/loginForm'
 
 export default {
   components: {
-    ContractorLogin,
-  },
-  computed: {
-    currentUser() {
-      return this.$store.state.wholesaler.data
-    }
+    LoginForm,
   }
 }
 </script>
 
-<style scoped lang="sass">
-
+<style scoped>
+.login_page{
+  height: 100%;
+  text-align: center;
+  background-image: url("../../../images/airbnbimg.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+.bg-mask{
+  height: 100%;
+  background-color:rgba(255,255,255,0.8);
+}
+.site_name{
+  padding: 2rem 0;
+  color: #7F7F7F;
+}
 </style>

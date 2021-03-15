@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: 'page#index'
   get '/login', to: 'page#index'
   get '/wholesaler/login', to: 'page#index'
+  get '/contractor/login', to: 'page#index'
   get '/wholesaler/mypage/items', to: 'page#index'
   get '/wholesaler/mypage/items/new', to: 'page#index'
   get '/wholesaler/mypage/items/:id/edit', to: 'page#index'
