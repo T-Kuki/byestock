@@ -5,11 +5,16 @@ import Home from './pages/site/home'
 import Login from './pages/wholesaler/loginPage.vue'
 import ContractorLogin from './pages/contractor/loginPage.vue'
 import WholesalerMypage from './pages/wholesaler/mypage.vue'
+import ContractorMypage from './pages/contractor/mypage.vue'
 import ItemMgmt from './components/organsms/wholesaler/itemMgmt'
+import OrdersMgmt from './components/organsms/contractor/ordersMgmt'
 import ReceivedOrder from './components/organsms/wholesaler/receivedOrderMgmt'
 import Profile from './components/organsms/wholesaler/profileMgmt'
 import Email from './components/organsms/wholesaler/emailMgmt'
 import Password from './components/organsms/wholesaler/passwordMgmt'
+import ContractorProfile from './components/organsms/contractor/profileMgmt'
+import ContractorEmail from './components/organsms/contractor/emailMgmt'
+import ContractorPassword from './components/organsms/contractor/passwordMgmt'
 import NewItem from './components/organsms/wholesaler/newItem'
 import EditItem from './components/organsms/wholesaler/editItem'
 
@@ -98,6 +103,33 @@ const routes= [
         path: 'password',
         name: 'password',
         component: Password
+      },
+    ]
+  },
+  {
+    path: '/contractor/mypage',
+    name: 'contractorMypage',
+    component: ContractorMypage,
+    children: [
+      {
+        path: 'orders',
+        name: 'orders',
+        component: OrdersMgmt,
+      },
+      {
+        path: 'profile',
+        name: 'contractorProfile',
+        component: ContractorProfile
+      },
+      {
+        path: 'email',
+        name: 'contractorEmail',
+        component: ContractorEmail
+      },
+      {
+        path: 'password',
+        name: 'contractorPassword',
+        component: ContractorPassword
       },
     ]
   },

@@ -3,9 +3,12 @@
     <h1 class="title">
       byestock
     </h1>
-    <p> {{ currentUser.email }} さん</p>
+    <p v-if="currentUser">
+      {{ currentUser.email }} さん
+    </p>
     <div>
-      <WholesalerMenuList v-if="routeMatch" />
+      <WholesalerMenuList v-if="routeMatchWholesaler" />
+      <ContractorMenuList v-else-if="routeMatchContractor" />
       <MenuList v-else />
     </div>
     <button
@@ -18,24 +21,37 @@
       @click="showMypage">
       マイページ
     </button>
+    <div>
+      <button
+        class="logout_btn"
+        @click="showContractorMypage">
+        建設業者マイページ
+      </button>
+    </div>
   </div>
 </template>
 
 <script>
 import MenuList from '../../molecules/sideNav/menuLists'
 import WholesalerMenuList from '../../molecules/sideNav/wholesalerMenuLists'
+import ContractorMenuList from '../../molecules/sideNav/contractorMenuLists'
 export default {
   components: {
     MenuList,
-    WholesalerMenuList
+    WholesalerMenuList,
+    ContractorMenuList
   },
   computed: {
     currentUser() {
       return this.$store.state.wholesaler.data
     },
-    routeMatch() {
+    routeMatchWholesaler() {
       return location.pathname.match(/^\/wholesaler/)
-    }
+    },
+    routeMatchContractor() {
+      return location.pathname.match(/^\/contractor/)
+    },
+
   },
   methods: {
     logout() {
@@ -44,6 +60,9 @@ export default {
     },
     showMypage(){
       this.$router.push({ name: 'items'})
+    },
+    showContractorMypage(){
+      this.$router.push({ name: 'orders'})
     }
   }
 

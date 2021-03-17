@@ -6,11 +6,10 @@
         <label class="form_label">
           現在のメールアドレス
         </label>
-        <h4>{{ currentWholesaler.email }}</h4>
+        <h4>test@email.com</h4>
       </div>
       <form @submit.prevent="update()">
         <InputForm
-          v-model="wholesaler.email"
           label="メールアドレス"
           placeholder="メールアドレス"
           name="email"
@@ -30,7 +29,6 @@
 <script>
 import InputForm from '../../molecules/input/inputForm'
 import Button from '../../atoms/button'
-import axios from 'axios'
 export default {
   components: {
     InputForm,
@@ -38,32 +36,10 @@ export default {
   },
   data: function() {
     return {
-      wholesaler: {},
+      contractor: {},
       name: '',
     }
   },
-  computed: {
-    currentWholesaler() {
-      return this.$store.state.wholesaler.data
-    }
-  },
-  mounted () {
-    this.getProfile().then(result => {
-      this.wholesaler = result
-    })
-  },
-  methods: {
-    backItems() {
-      this.$router.push({ name: 'items'})
-    },
-    getProfile: async function() {
-      const res = await axios .get(`/api/v1/wholesalers/${this.currentWholesaler.id}.json`, {headers: this.$store.state.wholesaler.headers, data: {} })
-      return res.data.wholesaler
-    },
-    update(){
-      this.$store.dispatch('wholesaler/updateProfile', this.wholesaler)
-    }
-  }
 }
 </script>
 

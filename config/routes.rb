@@ -11,6 +11,12 @@ Rails.application.routes.draw do
   get '/wholesaler/mypage/profile', to: 'page#index'
   get '/wholesaler/mypage/email', to: 'page#index'
   get '/wholesaler/mypage/password', to: 'page#index'
+  get '/wholesaler/mypage/orders', to: 'page#index'
+  get '/contractor/mypage/profile', to: 'page#index'
+  get '/contractor/mypage/email', to: 'page#index'
+  get '/contractor/mypage/password', to: 'page#index'
+
+  get '/contractor/mypage/orders', to: 'page#index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   namespace :api, defaults: { format: 'json' } do
     namespace :v1 do

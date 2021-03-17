@@ -15,9 +15,6 @@ export default {
   components: {
     Navbar,
   },
-  currentGetter(){
-    return this.$store.getters.data
-  }
 }
 </script>
 
